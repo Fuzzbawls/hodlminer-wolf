@@ -14,5 +14,5 @@ before_install:
 install:
   - ./autogen.sh
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./nomacro.pl         ; fi
-  - ./configure CFLAGS="-O3 -march=native"
+  - ./configure CFLAGS="-O3 -march=native" --with-libcurl=/usr/local/opt/curl
   - make
