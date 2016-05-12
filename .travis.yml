@@ -1,0 +1,17 @@
+language: cpp
+
+matrix:
+  include:
+    - os: osx
+      compiler: clang
+      file: 'hodlminer-wolf-mac.zip'
+
+before install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated curl || brew install curl    ; fi
+
+install:
+  - ./autogen.sh
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./nomacro.pl         ; fi
+  - ./configure CFLAGS="-O3 -march=native"
+  - make
