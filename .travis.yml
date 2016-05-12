@@ -8,11 +8,8 @@ matrix:
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated autoconf || brew install autoconf    ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated automake || brew install automake    ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated openssl || brew install openssl    ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated curl || brew install curl    ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated pkg-config || brew install pkg-config    ; fi
 
 install:
   - ./autogen.sh
