@@ -4,7 +4,7 @@ matrix:
   include:
     - os: osx
       sudo: false
-      env: CONFIG_FLAGS="--with-libcurl=/usr/local/opt/curl" CFLAGS="-O3 -march=corei7-avx"
+      env: xCONFIG_FLAGS="--with-libcurl=/usr/local/opt/curl" xCFLAGS="-O3 -march=corei7-avx"
       osx_image: xcode6.4
       compiler: clang
       file: 'hodlminer-wolf-mac.zip'
@@ -12,7 +12,7 @@ matrix:
     - os: linux
       sudo: required
       dist: trusty
-      env: CONFIG_FLAGS=""
+      env: xCONFIG_FLAGS="" xCFLAGS="-O3 -march=native"
       compiler: gcc
       file: 'hodlminer-wolf-linux.tar.gz'
 
@@ -26,5 +26,5 @@ install: true
 script:
   - ./autogen.sh
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./nomacro.pl         ; fi
-  - ./configure CFLAGS="-O3 -march=native" $CFLAGS $CONFIG_FLAGS
+  - ./configure CFLAGS=${xCFLAGS} ${xCONFIG_FLAGS}
   - make
