@@ -5,6 +5,7 @@ sudo: false
 matrix:
   include:
     - os: osx
+      osx_image: xcode6.4
       compiler: clang
       file: 'hodlminer-wolf-mac.zip'
 
@@ -12,9 +13,6 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install curl    ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link curl --force     ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install clang-omp     ; fi
-  - export CXX=clang-omp++
-  - export CC=clang-omp
 
 install:
   - ./autogen.sh
