@@ -5,7 +5,7 @@ matrix:
     - os: osx
       sudo: false
       env: xCONFIG_FLAGS="--with-libcurl=/usr/local/opt/curl" xCFLAGS="-O3 -march=corei7-avx"
-      osx_image: xcode6.4
+      osx_image: xcode7.1
       compiler: clang
       file: 'hodlminer-wolf-mac.zip'
 
