@@ -1,4 +1,6 @@
-language: cpp
+language: c
+
+sudo: false
 
 matrix:
   include:
@@ -11,7 +13,8 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install curl    ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link curl --force     ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install clang-omp     ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link clang-omp --force     ; fi
+  - export CXX=clang-omp++
+  - export CC=clang-omp
 
 install:
   - ./autogen.sh
