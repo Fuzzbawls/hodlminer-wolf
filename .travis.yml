@@ -9,13 +9,9 @@ matrix:
       file: 'hodlminer-wolf-mac.zip'
 
     - os: linux
-      sudo: false
+      sudo: required
+      dist: trusty
       compiler: gcc
-      addons:
-        apt:
-          packages:
-            - curl
-            - libcurl4-gnutils-dev
       file: 'hodlminer-wolf-linux.tar.gz'
 
 before_install:
