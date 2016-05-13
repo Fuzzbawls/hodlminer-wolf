@@ -10,6 +10,8 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install curl    ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link curl --force     ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install clang-omp     ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link clang-omp --force     ; fi
 
 install:
   - ./autogen.sh
