@@ -1,5 +1,10 @@
 #include <stdint.h>
+#ifdef __APPLE__
+#include <emmintrin.h>
+#include <tmmintrin.h>
+#else
 #include <x86intrin.h>
+#endif
 
 #ifdef __APPLE__
 #include <libkern/OSByteOrder.h>
