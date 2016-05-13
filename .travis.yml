@@ -26,5 +26,5 @@ install: true
 script:
   - ./autogen.sh
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./nomacro.pl         ; fi
-  - ./configure CFLAGS=${xCFLAGS} ${xCONFIG_FLAGS}
+  - ./configure CFLAGS="${xCFLAGS}" ${xCONFIG_FLAGS}
   - make
