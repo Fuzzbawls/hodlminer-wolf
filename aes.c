@@ -1,10 +1,5 @@
 #include <stdint.h>
-#ifdef __APPLE__
-#include <emmintrin.h>
-#include <tmmintrin.h>
-#else
 #include <x86intrin.h>
-#endif
 
 #ifdef __APPLE__
 #include <libkern/OSByteOrder.h>
@@ -28,6 +23,10 @@
 #define __BIG_ENDIAN    BIG_ENDIAN
 #define __LITTLE_ENDIAN LITTLE_ENDIAN
 #define __PDP_ENDIAN    PDP_ENDIAN
+
+#define _mm256_set_m128i(v0, v1)  _mm256_insertf128_si256(_mm256_castsi128_si256(v1), (v0), 1)
+
+#define _mm256_setr_m128i(v0, v1) _mm256_set_m128i((v1), (v0))
 #endif // __APPLE__
 
 static inline void ExpandAESKey256_sub1(__m128i *tmp1, __m128i *tmp2)

@@ -4,6 +4,7 @@ matrix:
   include:
     - os: osx
       sudo: false
+      env: CONFIG_FLAGS="--with-libcurl=/usr/local/opt/curl" CC="gcc-5" CXX=g++-5
       osx_image: xcode6.4
       compiler: clang
       file: 'hodlminer-wolf-mac.zip'
@@ -11,6 +12,7 @@ matrix:
     - os: linux
       sudo: required
       dist: trusty
+      env: CONFIG_FLAGS=""
       compiler: gcc
       file: 'hodlminer-wolf-linux.tar.gz'
 
@@ -20,7 +22,9 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link curl --force     ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gcc     ; fi
 
-install:
+install: true
+
+script:
   - ./autogen.sh
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./nomacro.pl         ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export CONFIG_FLAGS="--with-libcurl=/usr/local/opt/curl"     ; fi
