@@ -1,21 +1,32 @@
 language: c
 
-sudo: false
-
 matrix:
   include:
     - os: osx
+      sudo: false
       osx_image: xcode6.4
       compiler: clang
       file: 'hodlminer-wolf-mac.zip'
+
+    - os: linux
+      sudo: false
+      compiler: gcc
+      addons:
+        apt:
+          packages:
+            - curl
+            - libcurl4-gnutils-dev
+      file: 'hodlminer-wolf-linux.tar.gz'
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install curl    ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link curl --force     ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gcc --without-multilib     ; fi
 
 install:
   - ./autogen.sh
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./nomacro.pl         ; fi
-  - ./configure CFLAGS="-O3 -march=native" --with-libcurl=/usr/local/opt/curl
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export CONFIG_FLAGS="--with-libcurl=/usr/local/opt/curl"     ; fi
+  - ./configure CFLAGS="-O3 -march=native" $CONFIG_FLAGS
   - make
